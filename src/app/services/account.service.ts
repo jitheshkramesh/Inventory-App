@@ -17,6 +17,17 @@ export class AccountService {
   private Username = new BehaviorSubject<string>(localStorage.getItem('username'));
   private UserRole = new BehaviorSubject<string>(localStorage.getItem('userRole'));
 
+  register(username: string, password: string, email: string) {
+    return this.http.post<any>(this.baseUrl + "Account/Register", { username, password, email }).pipe(
+      map(result => {
+        //registration was successful
+        return result;
+      }, error => {
+        return error;
+      })
+    );
+  }
+
   login(username: string, password: string) {
     return this.http.post<any>(this.baseUrl + "Account/Login", { username, password }).pipe(
       map(result => {
@@ -24,11 +35,11 @@ export class AccountService {
           this.loginStatus.next(true);
           localStorage.setItem('loginStatus', '1');
           localStorage.setItem('jwt', result.token);
-          localStorage.setItem('username', result.token);
+          localStorage.setItem('username', result.username);
           localStorage.setItem('expiration', result.expiration);
           localStorage.setItem('userRole', result.userRole);
-          this.router.navigate['/login'];
-          console.log('logged out successfully');
+          this.Username.next(localStorage.getItem('username'));
+          this.UserRole.next(localStorage.getItem('userRole'));
         }
         return result;
       })
@@ -42,9 +53,13 @@ export class AccountService {
     localStorage.removeItem('username');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userRole');
+    this.router.navigate(['/login']);
+    console.log('logged out successfully');
   }
 
   checkLoginStatus(): boolean {
+    var loginCookie = localStorage.getItem('loginStatus');
+    if (loginCookie == "1") { return true; }
     return false;
   }
 

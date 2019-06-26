@@ -9,7 +9,7 @@
               <input id="username" formControlName="username" type="text" class="form-control" placeholder="" required autofocus>
               <div *ngIf="username.touched && username.errors" class="errorMessage">
                   <span *ngIf="username.hasError('required')">UserName is required.</span>
-                  <span *ngIf="username.hasError('maxlength')">Only 10 characters allowed for UserName.</span>
+                  <span *ngIf="username.hasError('maxlength')">Only 15 characters allowed for UserName.</span>
                   <span *ngIf="username.hasError('minlength')">Atleast 5 characters needed for UserName.</span>
               </div>
             </div>
@@ -18,7 +18,7 @@
               <input id="password" formControlName="password" type="password" class="form-control" placeholder="" required>
               <div *ngIf="password.touched && password.errors" class="errorMessage">
                   <span *ngIf="password.hasError('required')">Password is required.</span>
-                  <span *ngIf="password.hasError('maxlength')">Only 10 characters allowed for password.</span>
+                  <span *ngIf="password.hasError('maxlength')">Only 15 characters allowed for password.</span>
                   <span *ngIf="password.hasError('minlength')">Atleast 5 characters needed for password.</span>
               </div>
             </div>

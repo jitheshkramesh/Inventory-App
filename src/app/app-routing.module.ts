@@ -6,10 +6,11 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
-  { path: '', component: HomeComponent, pathMatch: 'full' },  
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'products', loadChildren: './products/products.module#ProductsModule' },
   { path: "register", component: RegisterComponent },
-  { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo:'/home' }
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
